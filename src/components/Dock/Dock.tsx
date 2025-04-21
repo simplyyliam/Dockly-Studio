@@ -9,9 +9,8 @@ function Dock() {
       <span className="w-0.75 h-7 bg-[#0D0D0D50] rounded-full "></span>
         <Icon onClick={() => {}} Icon="/Dock-Icons/store.png" width={24} />
         <Icon onClick={() => {}} Icon="/Dock-Icons/spotify.png" width={24} />
-      <div className="flex items-center justify-center p-2 w-11 h-11 rounded-[10px]">
         <Icon onClick={() => {}} Icon="/Dock-Icons/discord.png" width={24} />
-      </div>
+
       
       {/* Dock Widgets*/}
       <div className="flex items-center gap-2 p-2.5 w-45 h-13 bg-black/10 rounded-[15px]">
