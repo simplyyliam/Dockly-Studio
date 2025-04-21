@@ -1,7 +1,7 @@
 
 function Dock() {
   return (
-    <div className="flex gap-2.5 items-center justify-center bg-black/10 p-3 rounded-[20px] w-auto absolute bottom-5">
+    <div className="flex gap-2.5 items-center justify-center bg-black/10 p-2 rounded-[20px] w-auto absolute bottom-5">
       <div className="flex items-center justify-center p-2 w-11 h-11 hover:bg-black/5 transition ease-linear delay-100 cursor-pointer rounded-[10px]">
       <div className="relative w-[34px] h-[24px] felx items-center justify-center">
           <img src="/Dock-Icons/Modules.png" alt="" />
