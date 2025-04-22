@@ -8,7 +8,7 @@ import ControlCenter from "./components/Menubar.tsx/ControlCenter";
 function App() {
   const [showControlCenter, setShowControlCenter] = useState(false)
 
-  const ControlCenterRef = useRef(null)
+  const ControlCenterRef = useRef<HTMLDivElement>(null)
   
   const HandleControlCenter = () => {
     setShowControlCenter((prev) => !prev)
@@ -24,6 +24,29 @@ function App() {
       })
     }
   }, [showControlCenter])
+
+
+  //When you click outside or on any area of the page, the component will be set to false
+  useEffect(() => {
+    const handleClickOutside = (e: Event) => {
+      if (
+        ControlCenterRef.current &&
+        !ControlCenterRef.current.contains(e.target as Node)
+      ) {
+        setShowControlCenter(false); // Close menu
+      }
+    };
+
+    if (showControlCenter) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showControlCenter]);
 
 
   return (
