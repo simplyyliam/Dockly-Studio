@@ -4,12 +4,12 @@ function Dock() {
   return (
     // App Icons
     <div className="flex gap-2.5 items-center justify-center bg-black/10 p-2 rounded-[20px] w-auto absolute bottom-5">
-      <Icon onClick={() => {}} Icon="/Dock-Icons/Modules.png" width={34} />
-      <Icon onClick={() => {}} Icon="/Dock-Icons/Folder.png" width={24} />
+      <Icon onClick={() => {}} Icon="/Dock-Icons/Modules.png" width={34} Rounded={10} />
+      <Icon onClick={() => {}} Icon="/Dock-Icons/Folder.png" width={24} Rounded={10} />
       <span className="w-0.75 h-7 bg-[#0D0D0D50] rounded-full "></span>
-      <Icon onClick={() => {}} Icon="/Dock-Icons/store.png" width={24} />
-      <Icon onClick={() => {}} Icon="/Dock-Icons/spotify.png" width={24} />
-      <Icon onClick={() => {}} Icon="/Dock-Icons/discord.png" width={24} />
+      <Icon onClick={() => {}} Icon="/Dock-Icons/store.png" width={24} Rounded={10} />
+      <Icon onClick={() => {}} Icon="/Dock-Icons/spotify.png" width={24} Rounded={10} />
+      <Icon onClick={() => {}} Icon="/Dock-Icons/discord.png" width={24} Rounded={10} />
 
       {/* Dock Widgets*/}
       <div className="flex items-center gap-2 p-2.5 w-45 h-13 bg-black/10 rounded-[15px]">
