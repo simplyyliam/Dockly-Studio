@@ -39,10 +39,10 @@ function QuickToggles() {
           <h1 className="font-medium text-white text-sm">Bluetooth</h1>
         </div>
       </div>
-      <div className="flex flex-col gap-2.5 items-center justify-center w-45 h-full">
-        <FocusModes onClick={() => {}} Icon="/Menubar-Icons/Moon.png" ModeTitle="Focus Mode" width={34}/>
-        <FocusModes onClick={() => {}} Icon="/Menubar-Icons/Gaming.png" ModeTitle="Gaming" width={34}/>
-        <FocusModes onClick={() => {}} Icon="/Menubar-Icons/Productivity.png" ModeTitle="Productivity" width={34}/>
+      <div className="flex flex-col gap-2 items-center justify-center w-45 h-full">
+        <FocusModes onClick={() => {}} Icon="/Menubar-Icons/Moon.png" ModeTitle="Focus Mode" width={18}/>
+        <FocusModes onClick={() => {}} Icon="/Menubar-Icons/Gaming.png" ModeTitle="Gaming" width={18}/>
+        <FocusModes onClick={() => {}} Icon="/Menubar-Icons/Productivity.png" ModeTitle="Productivity" width={18}/>
       </div>
     </div>
   );
