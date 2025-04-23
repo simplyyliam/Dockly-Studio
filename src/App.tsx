@@ -3,6 +3,7 @@ import gsap from "gsap";
 import Dock from "./components/Dock/Dock"
 import Menubar from "./components/Menubar.tsx/Menubar"
 import ControlCenter from "./components/Menubar.tsx/ControlCenter";
+import TimeModule from "./components/Shared/TimeModule";
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
           <ControlCenter />
         </div>
       )}
+      <TimeModule/>
     </div>
   );
 }
