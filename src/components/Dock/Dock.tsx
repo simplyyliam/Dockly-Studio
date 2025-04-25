@@ -24,6 +24,28 @@ function Dock() {
     }
   }, [showWidgetsMenu])
 
+    //When you click outside or on any area of the page, the component will be set to false
+    useEffect(() => {
+      const handleClickOutside = (e: Event) => {
+        if (
+          MenuRef.current &&
+          !MenuRef.current.contains(e.target as Node)
+        ) {
+          setShowWidgetsMenu(false); // Close menu
+        }
+      };
+  
+      if (showWidgetsMenu) {
+        document.addEventListener("mousedown", handleClickOutside);
+      } else {
+        document.removeEventListener("mousedown", handleClickOutside);
+      }
+  
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [showWidgetsMenu]);
+
   return (
     <>
       {showWidgetsMenu && (
