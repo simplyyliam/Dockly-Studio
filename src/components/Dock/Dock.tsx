@@ -1,6 +1,6 @@
 
 import { useEffect, useRef, useState } from "react";
-import CustomMenu from "../Shared Components/CustomMenu";
+import CustomMenu from "../Shared/CustomMenu";
 import Icon from "../Shared/Icon";
 import gsap from "gsap";
 
