@@ -4,12 +4,15 @@ import Dock from "./components/Dock/Dock"
 import Menubar from "./components/Menubar.tsx/Menubar"
 import ControlCenter from "./components/Menubar.tsx/ControlCenter";
 import TimeModule from "./components/Shared/TimeModule";
+import AppFolder from "./components/Shared/AppFolder";
 
 
 function App() {
   const [showControlCenter, setShowControlCenter] = useState(false)
+  const [showAppFolder, setShowAppFolder] = useState(false)
 
   const ControlCenterRef = useRef<HTMLDivElement>(null)
+  const AppfolderRef = useRef<HTMLDivElement | null>(null)
 
   
   const HandleControlCenter = () => {
@@ -34,12 +37,19 @@ function App() {
       if (
         ControlCenterRef.current &&
         !ControlCenterRef.current.contains(e.target as Node)
-      ) {
+      )  {
         setShowControlCenter(false); // Close menu
+      } 
+
+      if (
+        AppfolderRef.current &&
+        !AppfolderRef.current.contains(e.target as Node)
+      ) {
+        setShowAppFolder(false)
       }
     };
 
-    if (showControlCenter) {
+    if (showControlCenter || showAppFolder) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -48,14 +58,28 @@ function App() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showControlCenter]);
+  }, [showControlCenter, showAppFolder]);
 
+ const handleAppFolder = () => {
+  setShowAppFolder((prev) => !prev)
+ }
+
+ useEffect(() => {
+  if(showAppFolder) {
+    gsap.to(AppfolderRef.current, {
+      opacity: 1,
+      scale: 1,
+      ease: "expo.out",
+      duration: 0.4,
+    })
+  }
+}, [showAppFolder])
 
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[url('Shared-Icons/Bg-1.png')] bg-center bg-cover">
       <div className="absolute bottom-5">
-        <Dock />
+        <Dock Folder={handleAppFolder}/>
       </div>
       <div className="absolute top-0 w-full">
         <Menubar ControlCenter={HandleControlCenter} />
@@ -66,6 +90,12 @@ function App() {
           className="absolute top-15 right-5 opacity-0 scale-0"
         >
           <ControlCenter />
+        </div>
+      )}
+
+      {showAppFolder && (
+        <div ref={AppfolderRef} className="absolute opacity-0 scale-0 backdrop-blur-[5px]">
+          <AppFolder/>
         </div>
       )}
       <TimeModule />

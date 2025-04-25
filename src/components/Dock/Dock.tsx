@@ -4,7 +4,11 @@ import CustomMenu from "../Shared/CustomMenu";
 import Icon from "../Shared/Icon";
 import gsap from "gsap";
 
-function Dock() {
+interface Props {
+  Folder: () => void
+}
+
+function Dock({Folder}:Props) {
   const [showWidgetsMenu, setShowWidgetsMenu] = useState(false)
   const [showMusicPLayer, setShowMusicPLayer] = useState(false)
   const MenuRef = useRef<HTMLDivElement | null>(null)
@@ -81,7 +85,7 @@ function Dock() {
           Rounded={15}
         />
         <Icon
-          onClick={() => {}}
+          onClick={Folder}
           Icon="/Dock-Icons/Folder.png"
           width={24}
           Rounded={15}
