@@ -83,7 +83,7 @@ function Dock({Folder}:Props) {
         </div>
       )}
       {/* App Icons */}
-      <div className="flex gap-2.5 items-center justify-center bg-black/10 p-2 rounded-[20px] w-auto transition ease-linear">
+      <div className="flex gap-2.5 items-center justify-center bg-black/10 border-1 border-stone-900/25 p-2 rounded-[20px] w-auto transition ease-linear">
         <Icon
           onClick={HandleWidgets}
           Icon="/Dock-Icons/Modules.png"
