@@ -5,14 +5,17 @@ import Menubar from "./components/Menubar.tsx/Menubar"
 import ControlCenter from "./components/Menubar.tsx/ControlCenter";
 import TimeModule from "./components/Shared/TimeModule";
 import AppFolder from "./components/Shared/AppFolder";
+import CustomMenu from "./components/Shared/CustomMenu";
 
 
 function App() {
   const [showControlCenter, setShowControlCenter] = useState(false)
   const [showAppFolder, setShowAppFolder] = useState(false)
+  const [Wallpapers, setWallpapers] = useState(false)
 
   const ControlCenterRef = useRef<HTMLDivElement>(null)
   const AppfolderRef = useRef<HTMLDivElement | null>(null)
+  const WallpaperRef = useRef<HTMLDivElement | null>(null)
 
   
   const HandleControlCenter = () => {
@@ -47,9 +50,15 @@ function App() {
       ) {
         setShowAppFolder(false)
       }
+      if (
+        WallpaperRef.current &&
+        !WallpaperRef.current.contains(e.target as Node)
+      ) {
+        setWallpapers(false)
+      }
     };
 
-    if (showControlCenter || showAppFolder) {
+    if (showControlCenter || showAppFolder || Wallpapers) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -58,7 +67,7 @@ function App() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showControlCenter, showAppFolder]);
+  }, [showControlCenter, showAppFolder, Wallpapers]);
 
  const handleAppFolder = () => {
   setShowAppFolder((prev) => !prev)
@@ -76,13 +85,20 @@ function App() {
 }, [showAppFolder])
 
 
+const handleWallpapers = () => {
+  setWallpapers((prev) => !prev)
+}
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-[url('Shared-Icons/Bg-1.png')] bg-center bg-cover">
       <div className="absolute bottom-5">
-        <Dock Folder={handleAppFolder}/>
+        <Dock Folder={handleAppFolder} />
       </div>
       <div className="absolute top-0 w-full">
-        <Menubar ControlCenter={HandleControlCenter} />
+        <Menubar
+          ControlCenter={HandleControlCenter}
+          Wallpapers={handleWallpapers}
+        />
       </div>
       {showControlCenter && (
         <div
@@ -93,9 +109,18 @@ function App() {
         </div>
       )}
 
+      {Wallpapers && (
+        <div ref={WallpaperRef} className="absolute top-15 right-5">
+          <CustomMenu  onclick={() => {}}/>
+        </div>
+      )}
+
       {showAppFolder && (
-        <div ref={AppfolderRef} className="absolute opacity-0 scale-0 backdrop-blur-[5px]">
-          <AppFolder/>
+        <div
+          ref={AppfolderRef}
+          className="absolute opacity-0 scale-0 backdrop-blur-[5px]"
+        >
+          <AppFolder />
         </div>
       )}
       <TimeModule />
