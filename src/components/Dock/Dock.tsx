@@ -73,7 +73,13 @@ function Dock({Folder}:Props) {
     <>
       {showWidgetsMenu && (
         <div ref={MenuRef} className="absolute bottom-20 opacity-0 scale-0">
-          <CustomMenu onclick={HandleMusicPlayer} />
+          <CustomMenu
+            onclick1={HandleMusicPlayer}
+            label1="Music Player"
+            label2="Empty Widget"
+            label3="Empty Widget"
+            label4="Empty Widget"
+          />
         </div>
       )}
       {/* App Icons */}

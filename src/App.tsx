@@ -12,6 +12,8 @@ function App() {
   const [showControlCenter, setShowControlCenter] = useState(false)
   const [showAppFolder, setShowAppFolder] = useState(false)
   const [Wallpapers, setWallpapers] = useState(false)
+  const [activeWallpaper, setActivewallpaper] = useState<string | null>('Wallpaper1')
+
 
   const ControlCenterRef = useRef<HTMLDivElement>(null)
   const AppfolderRef = useRef<HTMLDivElement | null>(null)
@@ -89,8 +91,35 @@ const handleWallpapers = () => {
   setWallpapers((prev) => !prev)
 }
 
+  const handleWallpaper = (currentWallaper: string) => {
+    setActivewallpaper(currentWallaper)
+  }
+
   return (
-    <div className="flex items-center justify-center w-screen h-screen bg-[url('Shared-Icons/Bg-1.png')] bg-center bg-cover">
+    <div
+      className={`flex items-center justify-center w-screen h-screen 
+          ${
+            activeWallpaper === "Wallpaper1"
+              ? "bg-[url('/wallpapers/Wallpaper1.png')]"
+              : "bg-amber-50"
+          }
+          ${
+            activeWallpaper === "Wallpaper2"
+              ? "bg-[url('/wallpapers/Wallpaper2.png')]"
+              : "bg-amber-50"
+          }
+          ${
+            activeWallpaper === "Wallpaper3"
+              ? "bg-[url('/wallpapers/Wallpaper3.png')]"
+              : "bg-amber-50"
+          }
+          ${
+            activeWallpaper === "Wallpaper4"
+              ? "bg-[url('/wallpapers/Wallpaper4.png')]"
+              : "bg-amber-50"
+          }
+        bg-center bg-cover`}
+    >
       <div className="absolute bottom-5">
         <Dock Folder={handleAppFolder} />
       </div>
@@ -111,7 +140,16 @@ const handleWallpapers = () => {
 
       {Wallpapers && (
         <div ref={WallpaperRef} className="absolute top-15 right-5">
-          <CustomMenu  onclick={() => {}}/>
+          <CustomMenu
+            onclick1={() => handleWallpaper("Wallpaper1")}
+            label1="Wallpaper 1"
+            onclick2={() => handleWallpaper("Wallpaper2")}
+            label2="Wallpaper 2"
+            onclick3={() => handleWallpaper("Wallpaper3")}
+            label3="Wallpaper 3"
+            onclick4={() => handleWallpaper("Wallpaper4")}
+            label4="Wallpaper 4"
+          />
         </div>
       )}
 

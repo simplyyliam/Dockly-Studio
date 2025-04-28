@@ -1,22 +1,33 @@
 
 interface Props {
-  onclick: () => void
+  onclick1: () => void
+  onclick2?: () => void
+  onclick3?: () => void
+  onclick4?: () => void
+  label1: string
+  label2: string
+  label3: string
+  label4?: string
+  label5?: string
 }
-function CustomMenu({onclick}:Props) {
+function CustomMenu({onclick1, onclick2, onclick3, onclick4, label1, label2, label3, label4}:Props) {
   return (
     <div className="flex p-2 items-center w-[14em] bg-black/10 rounded-xl">
       <div className="flex flex-col w-full gap-2">
-        <button onClick={onclick} className="flex text-sm w-full p-1 px-2 rounded-lg text-neutral-900 hover:bg-black/10 transition ease-out">
-          Music Player
+        <button
+          onClick={onclick1}
+          className="flex text-sm w-full p-1 px-2 rounded-lg text-neutral-900 hover:bg-black/10 transition ease-out"
+        >
+          {label1}
         </button>
-        <button className="flex text-sm w-full p-1 px-2 rounded-lg text-neutral-900 hover:bg-black/10 transition ease-out">
-          widget 2
+        <button onClick={onclick2} className="flex text-sm w-full p-1 px-2 rounded-lg text-neutral-900 hover:bg-black/10 transition ease-out">
+          {label2}
         </button>
-        <button className="flex text-sm w-full p-1 px-2 rounded-lg text-neutral-900 hover:bg-black/10 transition ease-out">
-          widget 3
+        <button onClick={onclick3} className="flex text-sm w-full p-1 px-2 rounded-lg text-neutral-900 hover:bg-black/10 transition ease-out">
+          {label3}
         </button>
-        <button className="flex text-sm w-full p-1 px-2 rounded-lg text-neutral-900 hover:bg-black/10 transition ease-out">
-          widget 4
+        <button onClick={onclick4} className="flex text-sm w-full p-1 px-2 rounded-lg text-neutral-900 hover:bg-black/10 transition ease-out">
+          {label4}
         </button>
       </div>
     </div>
