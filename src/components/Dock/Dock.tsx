@@ -6,9 +6,12 @@ import gsap from "gsap";
 
 interface Props {
   Folder: () => void
+  onStore: () => void
+  onSpotify: () => void
+  onDiscord: () => void
 }
 
-function Dock({Folder}:Props) {
+function Dock({Folder, onStore, onDiscord, onSpotify}:Props) {
   const [showWidgetsMenu, setShowWidgetsMenu] = useState(false)
   const [showMusicPLayer, setShowMusicPLayer] = useState(false)
   const MenuRef = useRef<HTMLDivElement | null>(null)
@@ -98,19 +101,19 @@ function Dock({Folder}:Props) {
         />
         <span className="w-0.75 h-7 bg-[#0D0D0D50] rounded-full "></span>
         <Icon
-          onClick={() => {}}
+          onClick={onStore}
           Icon="/Dock-Icons/store.png"
           width={24}
           Rounded={15}
         />
         <Icon
-          onClick={() => {}}
+          onClick={onSpotify}
           Icon="/Dock-Icons/spotify.png"
           width={24}
           Rounded={15}
         />
         <Icon
-          onClick={() => {}}
+          onClick={onDiscord}
           Icon="/Dock-Icons/discord.png"
           width={24}
           Rounded={15}

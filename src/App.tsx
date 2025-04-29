@@ -6,18 +6,25 @@ import ControlCenter from "./components/Menubar.tsx/ControlCenter";
 import TimeModule from "./components/Shared/TimeModule";
 import AppFolder from "./components/Shared/AppFolder";
 import CustomMenu from "./components/Shared/CustomMenu";
+import MicrosoftStore from "./components/Dock/Apps/CustomScreen";
+import CustomScreen from "./components/Dock/Apps/CustomScreen";
 
 
 function App() {
   const [showControlCenter, setShowControlCenter] = useState(false)
   const [showAppFolder, setShowAppFolder] = useState(false)
   const [Wallpapers, setWallpapers] = useState(false)
-  const [activeWallpaper, setActivewallpaper] = useState<string | null>('Wallpaper1')
+  const [activeWallpaper, setActivewallpaper] = useState<string | null>('Wallpaper4')
+
+  //Screens
+  const [openApp, setOpenApp] = useState<string | boolean>(false)
+
 
 
   const ControlCenterRef = useRef<HTMLDivElement>(null)
   const AppfolderRef = useRef<HTMLDivElement | null>(null)
   const WallpaperRef = useRef<HTMLDivElement | null>(null)
+  const AppRef = useRef<HTMLDivElement | null>(null)
 
   
   const HandleControlCenter = () => {
@@ -87,6 +94,8 @@ function App() {
 }, [showAppFolder])
 
 
+
+
 const handleWallpapers = () => {
   setWallpapers((prev) => !prev)
 }
@@ -95,9 +104,30 @@ const handleWallpapers = () => {
     setActivewallpaper(currentWallaper)
   }
 
+
+  const handleApplication = (currentApplication: string) => {
+    setOpenApp(currentApplication)
+    if (openApp === currentApplication) {
+      setOpenApp(false)
+    }
+  }
+
+  useEffect(() => {
+    if(openApp) {
+      gsap.to(AppRef.current, {
+        opacity: 1,
+        scale: 1,
+        ease: "expo.out",
+        duration: 0.4,
+      })
+    }
+  }, [openApp])
+
+
+
   return (
     <div
-      className={`flex items-center justify-center w-screen h-screen 
+      className={`flex items-center justify-center w-screen h-screen overflow-hidden
           ${
             activeWallpaper === "Wallpaper1"
               ? "bg-[url('/wallpapers/Wallpaper1.png')]"
@@ -121,7 +151,12 @@ const handleWallpapers = () => {
         bg-center bg-cover`}
     >
       <div className="absolute bottom-5">
-        <Dock Folder={handleAppFolder} />
+        <Dock
+          Folder={handleAppFolder}
+          onStore={() => handleApplication("Microsoft Store")}
+          onSpotify={() => handleApplication("Spotify")}
+          onDiscord={() => handleApplication("Discord")}
+        />
       </div>
       <div className="absolute top-0 w-full">
         <Menubar
@@ -162,6 +197,32 @@ const handleWallpapers = () => {
         </div>
       )}
       <TimeModule />
+
+      {/* App Screens */}
+      {openApp === "Microsoft Store" && (
+        <div ref={AppRef} className="opacity-0 scale-0">
+          <CustomScreen
+            url="https://apps.microsoft.com/home?hl=en-US&gl=US"
+            name="Microsoft Store"
+          />
+        </div>
+      )}
+      {openApp === "Spotify" && (
+        <div ref={AppRef} className="opacity-0 scale-0">
+          <CustomScreen
+            url="https://open.spotify.com/"
+            name="Microsoft Store"
+          />
+        </div>
+      )}
+      {openApp === "Discord" && (
+        <div ref={AppRef} className="opacity-0 scale-0">
+          <CustomScreen
+            url="https://discord.com/"
+            name="Microsoft Store"
+          />
+        </div>
+      )}
     </div>
   );
 }
