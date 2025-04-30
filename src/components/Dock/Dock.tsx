@@ -75,7 +75,7 @@ function Dock({Folder, onStore, onDiscord, onSpotify}:Props) {
   return (
     <>
       {showWidgetsMenu && (
-        <div ref={MenuRef} className="absolute bottom-20 opacity-0 scale-0">
+        <div ref={MenuRef} className="absolute bottom-20 opacity-0 scale-0 bg-black/10 rounded-xl backdrop-blur-md border-1 border-stone-200/25">
           <CustomMenu
             onclick1={HandleMusicPlayer}
             label1="Music Player"
@@ -86,7 +86,7 @@ function Dock({Folder, onStore, onDiscord, onSpotify}:Props) {
         </div>
       )}
       {/* App Icons */}
-      <div className="flex gap-2.5 items-center justify-center bg-black/10 border-1 border-stone-900/25 p-2 rounded-[20px] w-auto transition ease-linear">
+      <div className="flex gap-2.5 items-center justify-center bg-black/15 backdrop-blur-md border-1 border-stone-200/25 p-2 rounded-[20px] w-auto transition ease-linear">
         <Icon
           onClick={HandleWidgets}
           Icon="/Dock-Icons/Modules.png"
@@ -125,7 +125,7 @@ function Dock({Folder, onStore, onDiscord, onSpotify}:Props) {
             <span className="w-0.75 h-7 bg-[#0D0D0D50] rounded-full "></span>
             <div
               ref={MusicPLayerRef}
-              className="flex items-center gap-2 p-2.5 w-45 h-13 bg-black/10 rounded-[15px] opacity-0 scale-0"
+              className="flex items-center gap-2 p-2.5 w-45 h-13 bg-black/15 rounded-[15px] opacity-0 scale-0"
             >
               <div className="flex gap-2 flex-auto">
                 <div className="relative w-[34px] flex items-center justify-center">

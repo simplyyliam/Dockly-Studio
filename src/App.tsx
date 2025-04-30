@@ -6,7 +6,6 @@ import ControlCenter from "./components/Menubar.tsx/ControlCenter";
 import TimeModule from "./components/Shared/TimeModule";
 import AppFolder from "./components/Shared/AppFolder";
 import CustomMenu from "./components/Shared/CustomMenu";
-import MicrosoftStore from "./components/Dock/Apps/CustomScreen";
 import CustomScreen from "./components/Dock/Apps/CustomScreen";
 
 
@@ -174,7 +173,7 @@ const handleWallpapers = () => {
       )}
 
       {Wallpapers && (
-        <div ref={WallpaperRef} className="absolute top-15 right-5">
+        <div ref={WallpaperRef} className="absolute top-15 right-5 bg-black/10 rounded-xl backdrop-blur-md border-1 border-stone-200/25">
           <CustomMenu
             onclick1={() => handleWallpaper("Wallpaper1")}
             label1="Wallpaper 1"
@@ -191,7 +190,7 @@ const handleWallpapers = () => {
       {showAppFolder && (
         <div
           ref={AppfolderRef}
-          className="absolute opacity-0 scale-0 backdrop-blur-[5px]"
+          className="absolute opacity-0 scale-0 backdrop-blur-[5px] z-10"
         >
           <AppFolder />
         </div>
