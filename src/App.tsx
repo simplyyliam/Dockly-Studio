@@ -13,7 +13,7 @@ function App() {
   const [showControlCenter, setShowControlCenter] = useState(false)
   const [showAppFolder, setShowAppFolder] = useState(false)
   const [Wallpapers, setWallpapers] = useState(false)
-  const [activeWallpaper, setActivewallpaper] = useState<string | null>('Wallpaper4')
+  const [activeWallpaper, setActivewallpaper] = useState<string | null>('Wallpaper1')
 
   //Screens
   const [openApp, setOpenApp] = useState<string | boolean>(false)
@@ -201,7 +201,7 @@ const handleWallpapers = () => {
       {openApp === "Microsoft Store" && (
         <div ref={AppRef} className="opacity-0 scale-0">
           <CustomScreen
-            url="https://apps.microsoft.com/home?hl=en-US&gl=US"
+            url="https://apps.microsoft.com/"
             name="Microsoft Store"
           />
         </div>
@@ -209,16 +209,16 @@ const handleWallpapers = () => {
       {openApp === "Spotify" && (
         <div ref={AppRef} className="opacity-0 scale-0">
           <CustomScreen
-            url="https://open.spotify.com/"
-            name="Microsoft Store"
+            url="https://zapinterest.com/"
+            name="Spotify"
           />
         </div>
       )}
       {openApp === "Discord" && (
         <div ref={AppRef} className="opacity-0 scale-0">
           <CustomScreen
-            url="https://discord.com/"
-            name="Microsoft Store"
+            url="https://discord.gg/"
+            name="Discord"
           />
         </div>
       )}
