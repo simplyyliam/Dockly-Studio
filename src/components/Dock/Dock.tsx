@@ -1,83 +1,84 @@
-
 import { useEffect, useRef, useState } from "react";
 import CustomMenu from "../Shared/CustomMenu";
 import Icon from "../Shared/Icon";
 import gsap from "gsap";
 
 interface Props {
-  Folder: () => void
-  onStore: () => void
-  onSpotify: () => void
-  onDiscord: () => void
+  Folder: () => void;
+  onStore: () => void;
+  onSpotify: () => void;
+  onDiscord: () => void;
 }
 
-function Dock({Folder, onStore, onDiscord, onSpotify}:Props) {
-  const [showWidgetsMenu, setShowWidgetsMenu] = useState(false)
-  const [showMusicPLayer, setShowMusicPLayer] = useState(false)
-  const MenuRef = useRef<HTMLDivElement | null>(null)
-  const MusicPLayerRef = useRef<HTMLDivElement | null>(null)
+function Dock({ Folder, onStore, onDiscord, onSpotify }: Props) {
+  const [showWidgetsMenu, setShowWidgetsMenu] = useState(false); // State to toggle widgets menu
+  const [showMusicPlayer, setShowMusicPlayer] = useState(false); // State to toggle music player
+  const MenuRef = useRef<HTMLDivElement | null>(null); // Ref for widgets menu
+  const MusicPlayerRef = useRef<HTMLDivElement | null>(null); // Ref for music player
 
-  const HandleWidgets = () => {
-    setShowWidgetsMenu((prev) => !prev)
-  }
+  // Toggle widgets menu visibility
+  const handleWidgets = () => {
+    setShowWidgetsMenu((prev) => !prev);
+  };
 
-
+  // Animate widgets menu when it becomes visible
   useEffect(() => {
     if (showWidgetsMenu) {
       gsap.to(MenuRef.current, {
         opacity: 1,
-        scale: 1, 
+        scale: 1,
         ease: "expo.out",
         duration: 0.4,
-      })
+      });
     }
-  }, [showWidgetsMenu])
+  }, [showWidgetsMenu]);
 
-    //When you click outside or on any area of the page, the component will be set to false
-    useEffect(() => {
-      const handleClickOutside = (e: Event) => {
-        if (
-          MenuRef.current &&
-          !MenuRef.current.contains(e.target as Node)
-        ) {
-          setShowWidgetsMenu(false); // Close menu
-        }
-      };
-  
-      if (showWidgetsMenu) {
-        document.addEventListener("mousedown", handleClickOutside);
-      } else {
-        document.removeEventListener("mousedown", handleClickOutside);
+  // Close widgets menu when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (e: Event) => {
+      if (MenuRef.current && !MenuRef.current.contains(e.target as Node)) {
+        setShowWidgetsMenu(false);
       }
-  
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [showWidgetsMenu]);
+    };
 
-
-    const HandleMusicPlayer = () => {
-      setShowMusicPLayer((prev) => !prev)
+    if (showWidgetsMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
-    useEffect(() => {
-      if (showMusicPLayer) {
-        gsap.to(MusicPLayerRef.current, {
-          opacity: 1,
-          scale: 1, 
-          ease: "expo.out",
-          duration: 0.4,
-        })
-      }
-    }, [showMusicPLayer])
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showWidgetsMenu]);
 
+  // Toggle music player visibility
+  const handleMusicPlayer = () => {
+    setShowMusicPlayer((prev) => !prev);
+  };
+
+  // Animate music player when it becomes visible
+  useEffect(() => {
+    if (showMusicPlayer) {
+      gsap.to(MusicPlayerRef.current, {
+        opacity: 1,
+        scale: 1,
+        ease: "expo.out",
+        duration: 0.4,
+      });
+    }
+  }, [showMusicPlayer]);
 
   return (
     <>
+      {/* Widgets Menu */}
       {showWidgetsMenu && (
-        <div ref={MenuRef} className="absolute bottom-20 opacity-0 scale-0 bg-black/10 rounded-xl backdrop-blur-md border-1 border-stone-200/25">
+        <div
+          ref={MenuRef}
+          className="absolute bottom-20 opacity-0 scale-0 bg-black/10 rounded-xl backdrop-blur-md border-1 border-stone-200/25"
+        >
           <CustomMenu
-            onclick1={HandleMusicPlayer}
+            onclick1={handleMusicPlayer}
             label1="Music Player"
             label2="Empty Widget"
             label3="Empty Widget"
@@ -85,10 +86,11 @@ function Dock({Folder, onStore, onDiscord, onSpotify}:Props) {
           />
         </div>
       )}
-      {/* App Icons */}
+
+      {/* Dock Icons */}
       <div className="flex gap-2.5 items-center justify-center bg-black/15 backdrop-blur-md border-1 border-stone-200/25 p-2 rounded-[20px] w-auto transition ease-linear">
         <Icon
-          onClick={HandleWidgets}
+          onClick={handleWidgets}
           Icon="/Dock-Icons/Modules.png"
           width={24}
           Rounded={15}
@@ -99,7 +101,7 @@ function Dock({Folder, onStore, onDiscord, onSpotify}:Props) {
           width={24}
           Rounded={15}
         />
-        <span className="w-0.75 h-7 bg-[#0D0D0D50] rounded-full "></span>
+        <span className="w-0.75 h-7 bg-[#0D0D0D50] rounded-full"></span>
         <Icon
           onClick={onStore}
           Icon="/Dock-Icons/store.png"
@@ -119,12 +121,12 @@ function Dock({Folder, onStore, onDiscord, onSpotify}:Props) {
           Rounded={15}
         />
 
-        {/* Dock Widgets*/}
-        {showMusicPLayer && (
+        {/* Music Player */}
+        {showMusicPlayer && (
           <>
-            <span className="w-0.75 h-7 bg-[#0D0D0D50] rounded-full "></span>
+            <span className="w-0.75 h-7 bg-[#0D0D0D50] rounded-full"></span>
             <div
-              ref={MusicPLayerRef}
+              ref={MusicPlayerRef}
               className="flex items-center gap-2 p-2.5 w-45 h-13 bg-black/15 rounded-[15px] opacity-0 scale-0"
             >
               <div className="flex gap-2 flex-auto">
